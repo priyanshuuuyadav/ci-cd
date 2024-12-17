@@ -9,30 +9,30 @@ on:
     branches:
       - main
 
-job:
-  name: Build and release
-  runs-on: macos-latest
+jobs: # Changed from "job" to "jobs"
+  build_and_release: # Job ID, must be unique
+    name: Build and Release
+    runs-on: macos-latest
 
-  steps:
+    steps:
 
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set Up Java
-      uses: actions/setup-java@v3.12.0
-      with:
-        distribution: 'oracle'
-        java-version: '17'
+      - name: Set Up Java
+        uses: actions/setup-java@v3.12.0
+        with:
+          distribution: 'oracle'
+          java-version: '17'
 
-    - name: Set Up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.0'
-        channel: 'stable'
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
 
-    - name: Install Dependencies
-      run: flutter pub get
+      - name: Install Dependencies
+        run: flutter pub get
 
-
-    - name: run build
-      run: flutter build apk
+      - name: Run Build
+        run: flutter build apk
